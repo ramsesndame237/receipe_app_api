@@ -43,7 +43,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
+         node: [ 14, 16, 18 ]
+      
         # CodeQL supports the following values keywords for 'language': 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift'
         # Use `c-cpp` to analyze code written in C, C++ or both
         # Use 'java-kotlin' to analyze code written in Java, Kotlin or both
@@ -55,6 +56,12 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+    - name: Setup node
+      uses: actions/setup-node@v4
+      with:
+          node-version: ${{ matrix.node }}
+    - run: npm ci
+    - run: npm test
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
