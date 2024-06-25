@@ -13,9 +13,9 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master","develop",'staging' ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master","develop",'staging' ]
   schedule:
     - cron: '20 13 * * 2'
 
@@ -43,9 +43,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: ['javascript-typescript'] 
-        node: [ 18, 20, 21 ]
-      
+        language: ['javascript-typescript']
+        node: [ 18, 20, 21,22 ]
+
         # CodeQL supports the following values keywords for 'language': 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift'
         # Use `c-cpp` to analyze code written in C, C++ or both
         # Use 'java-kotlin' to analyze code written in Java, Kotlin or both
@@ -61,7 +61,7 @@ jobs:
       uses: actions/setup-node@v4
       with:
           node-version: ${{ matrix.node }}
-  
+
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
